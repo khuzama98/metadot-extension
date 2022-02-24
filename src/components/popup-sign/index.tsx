@@ -19,7 +19,9 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState(false);
 
-    const dummy = '9000jshdufdaaaaaaaaaaaaaaaaaaaaaajshdufdnf88df';
+    function trimString(s: any): string {
+        return `${s.substring(0, 4)}...${s.substring(s.length - 4)}`;
+    }
 
     const Signaturedata = [
         {
@@ -29,12 +31,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
         },
         {
             property: 'Genesis',
-            data: `${requests[0].request.payload.genesisHash.substring(
-                0,
-                4
-            )}...${requests[0].request.payload.genesisHash.substring(
-                requests[0].request.payload.genesisHash.length - 4
-            )}`,
+            data: trimString(requests[0].request.payload.genesisHash),
             copy: true,
             dataToCopy: requests[0].request.payload.genesisHash,
         },
@@ -50,12 +47,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
         },
         {
             property: 'Method Data',
-            data: `${requests[0].request.payload.method.substring(
-                0,
-                4
-            )}...${requests[0].request.payload.method.substring(
-                requests[0].request.payload.method.length - 4
-            )}`,
+            data: trimString(requests[0].request.payload.method),
             copy: true,
             dataToCopy: requests[0].request.payload.version.method,
         },
@@ -113,7 +105,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                             {requests[0].account.name}
                         </SubHeading>
                         <SubHeading ml="5px" marginTop="0px" mb="0px">
-                            {requests[0].account.address}
+                            {trimString(requests[0].account.address)}
                         </SubHeading>
                     </VerticalContentDiv>
                     <div
@@ -190,7 +182,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                     placeholder="Password For This Account"
                 />
 
-                <HorizontalContentDiv>
+                {/* <HorizontalContentDiv>
                     <img
                         src={passwordCheck ? CheckboxEnabled : CheckboxDisabled}
                         alt="checkbox"
@@ -206,7 +198,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                     <SubHeading ml="15px" marginTop="0px" mb="0px">
                         Remember my password for next 15 minutes
                     </SubHeading>
-                </HorizontalContentDiv>
+                </HorizontalContentDiv> */}
             </VerticalContentDiv>
 
             <Button
@@ -216,7 +208,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                 text="Sign The Transaction"
                 id="Authorization-Popup"
                 width="100%"
-                disabled={!passwordCheck}
+                disabled={password.length === 0}
             />
         </Wrapper>
     );

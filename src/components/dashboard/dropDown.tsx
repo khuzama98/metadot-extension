@@ -19,6 +19,7 @@ import accountIcon from '../../assets/images/icons/user.svg';
 import LockOutlinedIcon from '../../assets/images/icons/lock.svg';
 import ForumOutlinedIcon from '../../assets/images/icons/support.svg';
 import aboutIcon from '../../assets/images/icons/aboutIcon.svg';
+import manageAccess from '../../assets/images/icons/manage_access_logo.svg';
 import FileUploadOutlinedIcon from '../../assets/images/icons/export.svg';
 import FileDownloadOutlinedIcon from '../../assets/images/icons/download.svg';
 
@@ -218,6 +219,32 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
                                 &nbsp; &nbsp;
                                 <span style={{ fontSize: '0.85rem' }}>
                                     About
+                                </span>
+                            </ListItemIcon>
+                        </MenuItem>
+
+                        <MenuItem
+                            style={{
+                                minHeight: '37px',
+                                color: '#fafafa',
+                                fontSize: '15px',
+                            }}
+                            onClick={() => {
+                                navigate('/manageAccess');
+                            }}
+                        >
+                            <ListItemIcon
+                                className="flexStart"
+                                style={{ color: '#fafafa' }}
+                            >
+                                <img
+                                    src={manageAccess}
+                                    alt="lock-icon"
+                                    style={{ marginTop: '-0.2rem' }}
+                                />
+                                &nbsp; &nbsp;
+                                <span style={{ fontSize: '0.85rem' }}>
+                                    Manage Access
                                 </span>
                             </ListItemIcon>
                         </MenuItem>
