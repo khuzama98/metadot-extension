@@ -11,6 +11,7 @@ const {
     Support,
     CreateDerivedAccount,
     Send,
+    MultiSig,
 } = Views;
 
 const UnAuthRoutes = [
@@ -76,6 +77,10 @@ const AuthRoutes = [
     {
         path: '/ConfirmSeed',
         Component: ConfirmSeed,
+    },
+    {
+        path: '/multiSig',
+        Component: MultiSig,
     },
 ];
 

@@ -244,6 +244,27 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
                                 </span>
                             </ListItemIcon>
                         </MenuItem>
+                        <MenuItem
+                            style={{ minHeight: '37px', color: '#fafafa' }}
+                            onClick={() => {
+                                navigate('/multiSig');
+                            }}
+                        >
+                            <ListItemIcon
+                                className="flexStart"
+                                style={{ color: '#fafafa' }}
+                            >
+                                <img
+                                    src={LockOutlinedIcon}
+                                    alt="lock-icon"
+                                    style={{ marginTop: '-0.3rem' }}
+                                />
+                                &nbsp; &nbsp;
+                                <span style={{ fontSize: '0.85rem' }}>
+                                    MultiSig
+                                </span>
+                            </ListItemIcon>
+                        </MenuItem>
                     </MenuList>
                 </Paper>
             </Menu>
