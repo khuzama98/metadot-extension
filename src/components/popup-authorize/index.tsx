@@ -1,7 +1,7 @@
 import './index.css';
 import React from 'react';
-import { approveAuthRequest } from '../../messaging';
-import { MainHeading, SubHeading } from '../common/text';
+import { approveAuthRequest, rejectAuthRequest } from '../../messaging';
+import { MainHeading, SubHeading, WarningText } from '../common/text';
 import { colors } from '../../utils';
 import {
     HorizontalContentDiv,
@@ -66,12 +66,27 @@ const PopupAuth: React.FunctionComponent<any> = ({ requests }) => {
                 </VerticalContentDiv>
             </VerticalContentDiv>
 
-            <Button
-                handleClick={() => approveAuthRequest(requests[0].id)}
-                text="Allow Access"
-                id="Authorization-Popup"
-                width="100%"
-            />
+            <VerticalContentDiv style={{ alignItems: 'center' }}>
+                <Button
+                    handleClick={() => approveAuthRequest(requests[0].id)}
+                    text="Allow Access"
+                    id="Authorization-Popup"
+                    width="100%"
+                />
+
+                <WarningText
+                    visibility
+                    style={{
+                        alignSelf: 'center',
+                        textAlign: 'center',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => rejectAuthRequest(requests[0].id)}
+                >
+                    cancel
+                </WarningText>
+            </VerticalContentDiv>
         </Wrapper>
     );
 };

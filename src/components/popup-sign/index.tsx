@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TypeRegistry } from '@polkadot/types';
 import { formatNumber, bnToBn } from '@polkadot/util';
 import type { ExtrinsicEra } from '@polkadot/types/interfaces';
-import { approveSignPassword } from '../../messaging';
+import { approveSignPassword, cancelSignRequest } from '../../messaging';
 import {
     HorizontalContentDiv,
     VerticalContentDiv,
@@ -104,7 +104,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
             }}
         >
             <VerticalContentDiv>
-                <MainHeading textAlign="center">Authorize</MainHeading>
+                <MainHeading textAlign="center">Transaction</MainHeading>
             </VerticalContentDiv>
 
             <VerticalContentDiv
@@ -173,7 +173,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                                     </SubHeading>
                                 </div>
                                 <div style={{ width: '60%' }}>
-                                    <SubHeading lineHeight="14px">
+                                    <SubHeading lineHeight="14px" overFlow>
                                         {el.data}
                                     </SubHeading>
                                 </div>
@@ -224,7 +224,7 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                     typePassword
                     rightIcon
                     isCorrect
-                    leftPosition="-5px"
+                    leftPosition="-15px"
                     topPosition="1px"
                     {...styledInputPassword}
                 />
@@ -240,13 +240,27 @@ const PopupSign: React.FunctionComponent<any> = ({ requests }) => {
                 )}
             </VerticalContentDiv>
 
-            <Button
-                handleClick={handleSubmit}
-                text="Sign The Transaction"
-                id="Authorization-Popup"
-                width="100%"
-                disabled={password.length === 0}
-            />
+            <VerticalContentDiv style={{ alignItems: 'center' }}>
+                <Button
+                    handleClick={handleSubmit}
+                    text="Sign The Transaction"
+                    id="Authorization-Popup"
+                    width="100%"
+                    disabled={password.length === 0}
+                />
+                <WarningText
+                    visibility
+                    style={{
+                        alignSelf: 'center',
+                        textAlign: 'center',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => cancelSignRequest(requests[0].id)}
+                >
+                    cancel
+                </WarningText>
+            </VerticalContentDiv>
         </Wrapper>
     );
 };

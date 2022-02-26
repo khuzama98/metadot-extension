@@ -1,12 +1,12 @@
 import React from 'react';
-import { approveMetaRequest } from '../../messaging';
+import { approveMetaRequest, rejectMetaRequest } from '../../messaging';
 import {
     HorizontalContentDiv,
     VerticalContentDiv,
     Wrapper,
 } from '../common/wrapper';
 import WarningTriangleIcon from '../../assets/images/icons/warning_triangle.png';
-import { MainHeading, SubHeading } from '../common/text';
+import { MainHeading, SubHeading, WarningText } from '../common/text';
 import { Button } from '../common';
 
 const PopupMeta: React.FunctionComponent<any> = ({ requests }) => {
@@ -35,7 +35,8 @@ const PopupMeta: React.FunctionComponent<any> = ({ requests }) => {
         >
             <VerticalContentDiv>
                 <MainHeading textAlign="center">
-                    Metadata {`(1 out of ${requests.length})`}
+                    Metadata{' '}
+                    {requests.lenght > 0 ? `(1 out of ${requests.length})` : ''}
                 </MainHeading>
 
                 <VerticalContentDiv style={{ height: '160px' }}>
@@ -75,12 +76,27 @@ const PopupMeta: React.FunctionComponent<any> = ({ requests }) => {
                 </VerticalContentDiv>
             </VerticalContentDiv>
 
-            <Button
-                text="Update Metadata"
-                id="Authorization-Popup"
-                width="100%"
-                handleClick={() => approveMetaRequest(requests[0].id)}
-            />
+            <VerticalContentDiv style={{ alignItems: 'center' }}>
+                <Button
+                    text="Update Metadata"
+                    id="Authorization-Popup"
+                    width="100%"
+                    handleClick={() => approveMetaRequest(requests[0].id)}
+                />
+
+                <WarningText
+                    visibility
+                    style={{
+                        alignSelf: 'center',
+                        textAlign: 'center',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => rejectMetaRequest(requests[0].id)}
+                >
+                    cancel
+                </WarningText>
+            </VerticalContentDiv>
         </Wrapper>
     );
 };
